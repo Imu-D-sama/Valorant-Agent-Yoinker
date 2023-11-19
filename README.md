@@ -4,6 +4,8 @@ A tool that makes you instalock any agent you want and dodge the game
 
 **!!!This tool was originally made by https://github.com/deadly and then updated by me to include every agent and the ability to dodge a game and save your region!!!**
 
+you can contact me at my discord .imu_sama.
+
 # how to use
 
 1. First you have to download the compiled version and run it(**MAKE SURE THE GAME IS RUNNING WHILE USING IT**) or just download and run main.py.
