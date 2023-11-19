@@ -1,7 +1,10 @@
 import json, time
 from requests import session
 from valclient.client import Client
-print('Valorant Agent Yoinker originally by https://github.com/deadly updated by : https://github.com/Imu-D-sama')
+print('Valorant Agent Yoinker originally by https://github.com/deadly')
+print('updated by : https://github.com/Imu-D-sama')
+print('ver 0.1')
+print('for dodging type "dodge" at Preferred Agent')
 valid = False
 agents = {}
 seenMatches = []
@@ -27,7 +30,7 @@ else:
 
 while valid == False:
             try:
-                preferredAgent = input(f"Preferred agent: ").lower()
+                preferredAgent = input(f"Preferred Agent: ").lower()
                 if (preferredAgent in agents.keys() or preferredAgent == "dodge"):
                     valid = True    
                 else:
@@ -35,7 +38,6 @@ while valid == False:
             except Exception as e:
                 print("Input Error")          
 print("Waiting for Agent Select")
-sessionState = client.fetch_presence(client.puuid)['sessionLoopState']
 
 while True:
     try:
@@ -44,8 +46,8 @@ while True:
             client.pregame_quit_match()   
         elif ((sessionState == "PREGAME") and (client.pregame_fetch_match()['ID'] not in seenMatches) and (preferredAgent in agents.keys())):
             print('Agent Select Found')
-            client.pregame_select_character(agents[preferredAgent].lower())
-            client.pregame_lock_character(agents[preferredAgent].lower())
+            client.pregame_select_character(agents[preferredAgent])
+            client.pregame_lock_character(agents[preferredAgent])
             seenMatches.append(client.pregame_fetch_match()['ID'])
             print('Successfully Locked ' + preferredAgent.capitalize())
     except Exception as e:
