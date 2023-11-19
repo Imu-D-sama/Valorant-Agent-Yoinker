@@ -3,8 +3,7 @@ from requests import session
 from valclient.client import Client
 print('Valorant Agent Yoinker originally by https://github.com/deadly')
 print('updated by : https://github.com/Imu-D-sama')
-print('ver 0.1')
-print('for dodging type "dodge" at Preferred Agent')
+print('ver 0.2')
 valid = False
 agents = {}
 seenMatches = []
@@ -30,7 +29,7 @@ else:
 
 while valid == False:
             try:
-                preferredAgent = input(f"Preferred Agent: ").lower()
+                preferredAgent = input(f"Preferred Agent or dodge the match: ").lower()
                 if (preferredAgent in agents.keys() or preferredAgent == "dodge"):
                     valid = True    
                 else:
@@ -43,9 +42,12 @@ while True:
     try:
         sessionState = client.fetch_presence(client.puuid)['sessionLoopState']
         if((preferredAgent == "dodge") and (sessionState == "PREGAME") and (client.pregame_fetch_match()['ID'] not in seenMatches)):
-            client.pregame_quit_match()   
+            print('Agent Select Screen Found')
+            client.pregame_quit_match()
+            seenMatches.append(client.pregame_fetch_match()['ID'])
+            print('Successfully dodged the Match')
         elif ((sessionState == "PREGAME") and (client.pregame_fetch_match()['ID'] not in seenMatches) and (preferredAgent in agents.keys())):
-            print('Agent Select Found')
+            print('Agent Select Screen Found')
             client.pregame_select_character(agents[preferredAgent])
             client.pregame_lock_character(agents[preferredAgent])
             seenMatches.append(client.pregame_fetch_match()['ID'])
